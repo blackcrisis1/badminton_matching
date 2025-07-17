@@ -132,6 +132,7 @@ export default defineNuxtConfig({
     families: [
       { name: "Poppins", provider: "google" },
       { name: "Sarabun", provider: "google" },
+      { name: "Prompt", provider: "google" },
     ],
     experimental: {
       processCSSVariables: true,

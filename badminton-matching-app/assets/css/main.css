@@ -124,7 +124,8 @@
 } */
 
 body {
-  font-family: "LINE Seed Sans TH", "LINE Seed Sans EN", sans-serif;
+  /* font-family: "LINE Seed Sans TH", "LINE Seed Sans EN", sans-serif; */
+  font-family: "Prompt", sans-serif;
   background-color: var(--color-bg);
   color: var(--color);
   transition: background-color 0.3s;

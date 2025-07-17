@@ -36,6 +36,8 @@
             v-model="player.selected"
             :label="player.name"
             :id="'player-' + idx"
+            color="success"
+            size="lg"
           />
           <UButton
             type="button"
