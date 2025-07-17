@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - ./output:/app/.output
+    ports:
+      - "3000:3000" # Expose the application on port 3000
+    command: >
+      sh -c "
+        rm -rf /app/.output || true &&
+        NODE_OPTIONS=--max_old_space_size=2000 npx pnpm@9.15.4 generate
+      "
+    environment:
+      NODE_ENV: production

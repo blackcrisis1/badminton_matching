@@ -1,0 +1,106 @@
+@theme {
+  --font-line: "LINE Seed Sans TH", "LINE Seed Sans EN";
+  --font-poppins: "Poppins", "Sarabun", sans-serif;
+  --font-sarabun: "Sarabun", "Poppins", sans-serif;
+  --font-sans: var(--font-line);
+
+  --text-header-1: 2.5rem;
+  --text-header-1--line-height: 3.75rem;
+  --text-header-1--letter-spacing: 0;
+  --text-header-1--font-weight: 600;
+
+  --text-header-2: 2rem;
+  --text-header-2--line-height: 3rem;
+  --text-header-2--letter-spacing: 0;
+  --text-header-2--font-weight: 600;
+
+  --text-header-3: 1.75rem;
+  --text-header-3--line-height: 2.25rem;
+  --text-header-3--letter-spacing: 0;
+  --text-header-3--font-weight: 600;
+
+  --text-header-4: 1.5rem;
+  --text-header-4--line-height: 2rem;
+  --text-header-4--letter-spacing: 0;
+  --text-header-4--font-weight: 600;
+
+  --text-title-1: 1.25rem;
+  --text-title-1--line-height: 1.75rem;
+  --text-title-1--letter-spacing: 0;
+  --text-title-1--font-weight: 600;
+
+  --text-title-2: 1.125rem;
+  --text-title-2--line-height: 1.625rem;
+  --text-title-2--letter-spacing: 0;
+  --text-title-2--font-weight: 600;
+
+  --text-title-3: 1rem;
+  --text-title-3--line-height: 1.5rem;
+  --text-title-3--letter-spacing: 0;
+  --text-title-3--font-weight: 600;
+
+  --text-title-4: 0.75rem;
+  --text-title-4--line-height: 1.25rem;
+  --text-title-4--letter-spacing: 0;
+  --text-title-4--font-weight: 600;
+
+  --text-body-1: 1rem;
+  --text-body-1--line-height: 1.5rem;
+  --text-body-1--letter-spacing: 0;
+  --text-body-1--font-weight: 400;
+
+  --text-body-2: 0.875rem;
+  --text-body-2--line-height: 1.375rem;
+  --text-body-2--letter-spacing: 0;
+  --text-body-2--font-weight: 400;
+
+  --text-body-3: 0.75rem;
+  --text-body-3--line-height: 1.25rem;
+  --text-body-3--letter-spacing: 0;
+  --text-body-3--font-weight: 400;
+
+  --text-body-4: 0.625rem;
+  --text-body-4--line-height: 1rem;
+  --text-body-4--letter-spacing: 0;
+  --text-body-4--font-weight: 400;
+
+  --text-button-1: 1rem;
+  --text-button-1--line-height: 1.5rem;
+  --text-button-1--letter-spacing: 0;
+  --text-button-1--font-weight: 600;
+
+  --text-button-2: 0.875rem;
+  --text-button-2--line-height: 1.5rem;
+  --text-button-2--letter-spacing: 0;
+  --text-button-2--font-weight: 600;
+
+  --text-label-1: 1rem;
+  --text-label-1--line-height: 1.25rem;
+  --text-label-1--letter-spacing: 0;
+  --text-label-1--font-weight: 400;
+
+  --text-label-2: 0.875rem;
+  --text-label-2--line-height: 1.125rem;
+  --text-label-2--letter-spacing: 0;
+  --text-label-2--font-weight: 400;
+  --text-label-2--font-family: var(--font-line);
+
+  --text-input-1: 1rem;
+  --text-input-1--line-height: 1.5rem;
+  --text-input-1--letter-spacing: 0;
+  --text-input-1--font-weight: 400;
+
+  --text-input-2: 0.875rem;
+  --text-input-2--line-height: 1.5rem;
+  --text-input-2--letter-spacing: 0;
+  --text-input-2--font-weight: 400;
+}
+
+@layer base {
+  .text-body-1,
+  .text-body-2,
+  .text-body-3,
+  .text-body-4 {
+    font-family: var(--font-line);
+  }
+}

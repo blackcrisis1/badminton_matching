@@ -1,35 +1,33 @@
 <template>
-  <div>
-    <h1>Badminton Matching App</h1>
+  <div class="w-full flex flex-col gap-4">
     <PlayerForm />
-    <div v-if="matchedPlayers.length">
-      <h2>Matched Players:</h2>
-      <ul>
-        <li v-for="(player, index) in matchedPlayers" :key="index">{{ player }}</li>
-      </ul>
+    <div
+      v-if="matchedPlayers.length"
+      class="mt-4"
+    >
+      <h2 class="text-lg font-bold">Matched Players:</h2>
+      <div class="flex flex-col gap-2 p-2">
+        <UAlert
+          v-for="(player, index) in matchedPlayers"
+          :key="index"
+          color="success"
+          variant="soft"
+        >
+          <template #title>
+            <span class="text-lg font-medium">{{ player }}</span>
+          </template>
+        </UAlert>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import PlayerForm from '@/components/PlayerForm.vue'
-import { ref } from 'vue'
-import { useMatching } from '@/composables/useMatching'
+import PlayerForm from "@/components/PlayerForm.vue";
+import { ref } from "vue";
+import { useMatching } from "@/composables/useMatching";
 
-const { matchedPlayers } = useMatching()
+const { matchedPlayers } = useMatching();
 </script>
 
-<style scoped>
-h1 {
-  text-align: center;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  margin: 5px 0;
-}
-</style>
+<style scoped></style>

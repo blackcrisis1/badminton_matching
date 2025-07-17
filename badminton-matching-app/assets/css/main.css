@@ -1,0 +1,137 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+/* TH */
+@font-face {
+  font-family: "LINE Seed Sans TH";
+  src: url("@/assets/fonts/LINESeedSans/th/LINESeedSansTH_W_Th.woff2")
+    format("woff2");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "LINE Seed Sans TH";
+  src: url("@/assets/fonts/LINESeedSans/th/LINESeedSansTH_W_Rg.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "LINE Seed Sans TH";
+  src: url("@/assets/fonts/LINESeedSans/th/LINESeedSansTH_W_Bd.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "LINE Seed Sans TH";
+  src: url("@/assets/fonts/LINESeedSans/th/LINESeedSansTH_W_XBd.woff2")
+    format("woff2");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "LINE Seed Sans TH";
+  src: url("@/assets/fonts/LINESeedSans/th/LINESeedSansTH_W_He.woff2")
+    format("woff2");
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* EN */
+@font-face {
+  font-family: "LINE Seed Sans EN";
+  src: url("@/assets/fonts/LINESeedSans/en/LINESeedSans_W_Th.woff2")
+    format("woff2");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "LINE Seed Sans EN";
+  src: url("@/assets/fonts/LINESeedSans/en/LINESeedSans_W_Rg.woff2")
+    format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "LINE Seed Sans EN";
+  src: url("@/assets/fonts/LINESeedSans/en/LINESeedSans_W_Bd.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "LINE Seed Sans EN";
+  src: url("@/assets/fonts/LINESeedSans/en/LINESeedSans_W_XBd.woff2")
+    format("woff2");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "LINE Seed Sans EN";
+  src: url("@/assets/fonts/LINESeedSans/en/LINESeedSans_W_He.woff2")
+    format("woff2");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@theme {
+  --font-robotomono: "Roboto Mono";
+}
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-midnight-disable);
+  border-radius: 2px;
+}
+
+:root {
+  --color: #243746;
+  --color-primary: #6cc23c;
+  --color-secondary: #0e2233;
+  --color-bg: #ffffff;
+  --color-bg-secondary: #fff;
+  --border-color: #ddd;
+}
+
+.dark {
+  --color: #ebf4f1;
+  --color-primary: #6cc23c;
+  --color-secondary: #0e2233;
+  --color-bg: #2d2d2d;
+  --color-bg-secondary: #071521;
+  --border-color: #0d2538;
+  --ui-bg: #2d2d2d;
+}
+
+/* .sepia-mode {
+  --color: #433422;
+  --color-secondary: #504231;
+  --bg: #f1e7d0;
+  --bg-secondary: #eae0c9;
+  --border-color: #ded0bf;
+} */
+
+body {
+  font-family: "LINE Seed Sans TH", "LINE Seed Sans EN", sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color);
+  transition: background-color 0.3s;
+}
+
+a {
+  color: var(--color-primary);
+}
+
+@import "./theme/index.css";
