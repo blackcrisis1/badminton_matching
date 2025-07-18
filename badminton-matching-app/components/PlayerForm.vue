@@ -51,13 +51,18 @@
           </UButton>
         </div>
       </div>
-      <UButton
-        type="submit"
-        color="success"
-        block
+      <div
         v-if="playersList.length > 0"
-        >จับคู่</UButton
+        class="flex items-center space-x-2"
       >
+        <UInputNumber v-model="matchCount"  color="success" size="lg" />
+        <UButton
+          type="submit"
+          color="success"
+          block
+          >จับคู่ {{ matchCount }} ครั้ง</UButton
+        >
+      </div>
     </form>
   </div>
 </template>
@@ -68,6 +73,7 @@ import { useMatching } from "@/composables/useMatching";
 
 const playersInput = ref("");
 const playersList = ref([]);
+const matchCount = ref(1);
 
 const { matchPlayers } = useMatching();
 
@@ -93,6 +99,16 @@ function handleSubmit() {
   const selectedPlayers = playersList.value
     .filter((p) => p.selected)
     .map((p) => p.name);
-  matchPlayers(selectedPlayers);
+  
+  let currentRound = 0;
+  
+  const intervalId = setInterval(() => {
+    if (currentRound < matchCount.value) {
+      matchPlayers(selectedPlayers, currentRound + 1); // ส่ง round number
+      currentRound++;
+    } else {
+      clearInterval(intervalId);
+    }
+  }, 300);
 }
 </script>
