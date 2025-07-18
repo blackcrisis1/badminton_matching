@@ -6,7 +6,7 @@
       class="mt-4"
     >
       <h2 class="text-lg font-bold">Matched Players:</h2>
-      <div class="flex flex-col gap-2 p-2">
+      <div class="flex flex-col gap-2 pt-2">
         <UAlert
           v-for="(player, index) in matchedPlayers"
           :key="index"
@@ -18,6 +18,19 @@
           </template>
         </UAlert>
       </div>
+      <!-- <div class="columns-2 gap-4 pt-4">
+        <UAlert
+          v-for="(player, index) in matchedPlayers"
+          :key="index"
+          color="success"
+          variant="soft"
+          class="break-inside-avoid mb-4"
+        >
+          <template #title>
+            <span class="text-lg font-medium">{{ player }}</span>
+          </template>
+        </UAlert>
+      </div> -->
     </div>
   </div>
 </template>

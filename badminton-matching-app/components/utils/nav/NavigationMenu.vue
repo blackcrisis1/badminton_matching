@@ -1,5 +1,5 @@
 <template>
-  <nav class="sticky-navbar">
+  <nav class="sticky-navbar shadow-md">
     <!-- Add your navigation menu items here -->
     <ul class="flex items-center justify-between px-4 py-2">
       <span class="text-header-4">Badminton Matching App</span>
@@ -10,7 +10,13 @@
   </nav>
 </template>
 
-<script lang="ts" setup>
-</script>
+<script lang="ts" setup></script>
 
-<style></style>
+<style scoped>
+.sticky-navbar {
+  position: sticky;
+  top: 0;
+  background-color: var(--color-bg);
+  z-index: 1;
+}
+</style>
