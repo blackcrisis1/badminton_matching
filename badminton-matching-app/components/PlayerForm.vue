@@ -104,7 +104,7 @@ function handleSubmit() {
   
   const intervalId = setInterval(() => {
     if (currentRound < matchCount.value) {
-      matchPlayers(selectedPlayers, currentRound + 1); // ส่ง round number
+      matchPlayers(selectedPlayers);
       currentRound++;
     } else {
       clearInterval(intervalId);
