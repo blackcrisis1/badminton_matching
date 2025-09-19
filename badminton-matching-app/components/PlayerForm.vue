@@ -13,7 +13,7 @@
         class="w-full"
         id="players"
         v-model="playersInput"
-        rows="7"
+        :rows="7"
         color="success"
       />
       <UButton

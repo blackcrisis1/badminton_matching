@@ -1,7 +1,7 @@
 import { ref, reactive } from 'vue'
 
 interface MatchHistory {
-  [key: string]: Set<string>
+  [key: string]: { [opponent: string]: number }
 }
 
 interface MatchResult {
@@ -15,7 +15,7 @@ const matchHistory = reactive<MatchHistory>({})
 const currentRound = ref(1)
 
 export function useMatching() {
-  // ฟังก์ชันสำหรับสุ่มอาเรย์แบบ Fisher-Yates
+  // ฟังก์ชันสุ่มแบบ Fisher-Yates
   function shuffleArray<T>(array: T[]): T[] {
     const shuffled = [...array]
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -25,47 +25,43 @@ export function useMatching() {
     return shuffled
   }
 
-  // ฟังก์ชันตรวจสอบว่าผู้เล่น 2 คนเคยจับคู่กันแล้วหรือไม่
-  function hasPlayedTogether(player1: string, player2: string): boolean {
-    return matchHistory[player1]?.has(player2) || false
-  }
-
-  // ฟังก์ชันบันทึกประวัติการจับคู่
+  // ฟังก์ชันบันทึกประวัติการจับคู่ (นับจำนวนครั้งที่เจอกัน)
   function recordMatch(player1: string, player2: string): void {
-    if (!matchHistory[player1]) matchHistory[player1] = new Set()
-    if (!matchHistory[player2]) matchHistory[player2] = new Set()
-    
-    matchHistory[player1].add(player2)
-    matchHistory[player2].add(player1)
+    if (!matchHistory[player1]) matchHistory[player1] = {}
+    if (!matchHistory[player2]) matchHistory[player2] = {}
+
+    matchHistory[player1][player2] = (matchHistory[player1][player2] || 0) + 1
+    matchHistory[player2][player1] = (matchHistory[player2][player1] || 0) + 1
   }
 
-  // ฟังก์ชันหาคู่ที่เหมาะสมที่สุดสำหรับผู้เล่น
+  // ฟังก์ชันหาคู่ที่เหมาะสมที่สุด (weighted + fairness)
   function findBestMatch(player: string, availablePlayers: string[]): string | null {
-    // หาผู้เล่นที่ไม่เคยจับคู่ด้วยก่อน
-    const neverPlayed = availablePlayers.filter(p => !hasPlayedTogether(player, p))
-    
-    if (neverPlayed.length > 0) {
-      return neverPlayed[Math.floor(Math.random() * neverPlayed.length)]
-    }
-    
-    // ถ้าเคยจับคู่กับทุกคนแล้ว ให้เลือกคนที่จับคู่น้อยที่สุด
-    const playedCounts = availablePlayers.map(p => ({
-      player: p,
-      count: matchHistory[player]?.has(p) ? 1 : 0
-    }))
-    
-    playedCounts.sort((a, b) => a.count - b.count)
-    return playedCounts[0]?.player || null
+    if (availablePlayers.length === 0) return null
+
+    console.log('matchHistory:', JSON.stringify(matchHistory))
+
+    const candidates = availablePlayers.map(p => {
+      const times = matchHistory[player]?.[p] || 0
+      return { player: p, times }
+    })
+
+    // เรียงตามจำนวนครั้งที่เจอน้อยสุด
+    candidates.sort((a, b) => a.times - b.times)
+
+    // เลือกจากกลุ่มที่เจอน้อยที่สุด (สุ่มถ้ามีหลายตัวเลือก)
+    const minTimes = candidates[0].times
+    const bestOptions = candidates.filter(c => c.times === minTimes)
+
+    return bestOptions[Math.floor(Math.random() * bestOptions.length)].player
   }
 
-  // ฟังก์ชันจับคู่แบบอัจฉริยะ
+  // ฟังก์ชันจับคู่แบบอัจฉริยะ (อัปเกรด)
   function matchPlayersIntelligent(players: string[]): MatchResult {
     const shuffled = shuffleArray(players)
     const pairs: string[] = []
     const remaining: string[] = []
     const used = new Set<string>()
 
-    // พยายามจับคู่ให้ได้มากที่สุด
     for (const player of shuffled) {
       if (used.has(player)) continue
 
@@ -111,7 +107,7 @@ export function useMatching() {
     }
   }
 
-  // ฟังก์ชันจับคู่แบบรอบโรบิน (ทุกคนได้เล่นกับทุกคน)
+  // ฟังก์ชันจับคู่แบบรอบโรบิน
   function matchPlayersRoundRobin(players: string[], roundNumber: number = 1): MatchResult {
     const pairs: string[] = []
     const remaining: string[] = []
@@ -121,11 +117,8 @@ export function useMatching() {
       return { pairs: [], remaining: [...players], totalRounds: 1 }
     }
 
-    // สำหรับจำนวนผู้เล่นคี่ ให้เพิ่ม "BYE" player
     const adjustedPlayers = n % 2 === 0 ? [...players] : [...players, 'BYE']
     const totalPlayers = adjustedPlayers.length
-
-    // คำนวณรอบการจับคู่
     const effectiveRound = ((roundNumber - 1) % (totalPlayers - 1)) + 1
 
     for (let i = 0; i < totalPlayers / 2; i++) {
@@ -162,7 +155,7 @@ export function useMatching() {
 
   // ฟังก์ชันหลักสำหรับจับคู่
   function matchPlayers(
-    players: string[], 
+    players: string[],
     mode: 'random' | 'intelligent' | 'round-robin' = 'intelligent'
   ): void {
     if (players.length === 0) {
@@ -195,7 +188,7 @@ export function useMatching() {
 
   // ฟังก์ชันดูประวัติการจับคู่
   function getMatchHistory(): MatchHistory {
-    return { ...matchHistory }
+    return JSON.parse(JSON.stringify(matchHistory))
   }
 
   // ฟังก์ชันรีเซ็ตประวัติ
@@ -212,9 +205,15 @@ export function useMatching() {
     partners: string[]
     roundsPlayed: number
   } {
-    const partners = matchHistory[playerName] ? Array.from(matchHistory[playerName]) : []
+    const partners = matchHistory[playerName]
+      ? Object.keys(matchHistory[playerName])
+      : []
+    const totalMatches = partners.reduce(
+      (sum, p) => sum + (matchHistory[playerName][p] || 0),
+      0
+    )
     return {
-      totalMatches: partners.length,
+      totalMatches,
       partners,
       roundsPlayed: currentRound.value - 1
     }
