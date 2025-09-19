@@ -10,7 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "engines": {
-    "node": ">=20",
+    "node": "20.x",
     "pnpm": ">=9"
   },
   "dependencies": {
