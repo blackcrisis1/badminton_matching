@@ -9,13 +9,13 @@ interface MatchResult {
 }
 
 const matchedPlayers = ref<string[]>([])
-const matchHistory = reactive<MatchHistory>({})
+const matchHistory = reactive<any>({})
 const currentRound = ref(1)
 
 export function useMatching() {
   // ฟังก์ชันสุ่มแบบ Fisher-Yates
   function shuffleArray<T>(array: T[]): T[] {
-    const shuffled = [...array]
+    const shuffled = [...array] as any
     for (let i = shuffled.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1))
       ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
@@ -36,19 +36,17 @@ export function useMatching() {
   function findBestMatch(player: string, availablePlayers: string[]): string | null {
     if (availablePlayers.length === 0) return null
 
-    console.log('matchHistory:', JSON.stringify(matchHistory))
-
     const candidates = availablePlayers.map(p => {
       const times = matchHistory[player]?.[p] || 0
       return { player: p, times }
-    })
+    }) as any
 
     // เรียงตามจำนวนครั้งที่เจอน้อยสุด
-    candidates.sort((a, b) => a.times - b.times)
+    candidates.sort((a:any, b:any) => a.times - b.times)
 
     // เลือกจากกลุ่มที่เจอน้อยที่สุด (สุ่มถ้ามีหลายตัวเลือก)
     const minTimes = candidates[0].times
-    const bestOptions = candidates.filter(c => c.times === minTimes)
+    const bestOptions = candidates.filter((c:any) => c.times === minTimes)
 
     return bestOptions[Math.floor(Math.random() * bestOptions.length)].player
   }
@@ -85,7 +83,7 @@ export function useMatching() {
 
   // ฟังก์ชันจับคู่แบบสุ่มธรรมดา
   function matchPlayersRandom(players: string[]): MatchResult {
-    const shuffled = shuffleArray(players)
+    const shuffled = shuffleArray(players) as any
     const pairs: string[] = []
     const remaining: string[] = []
 
@@ -131,8 +129,8 @@ export function useMatching() {
         player2Index = ((effectiveRound + i - 1) % totalPlayers)
       }
 
-      const player1 = adjustedPlayers[player1Index]
-      const player2 = adjustedPlayers[player2Index]
+      const player1 = adjustedPlayers[player1Index] as any
+      const player2 = adjustedPlayers[player2Index] as any
 
       if (player1 !== 'BYE' && player2 !== 'BYE') {
         pairs.push(`${player1} - ${player2}`)

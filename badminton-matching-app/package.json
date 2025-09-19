@@ -15,24 +15,14 @@
   },
   "dependencies": {
     "@nuxt/fonts": "0.11.0",
-    "@nuxtjs/i18n": "^9.5.4",
-    "@pinia/nuxt": "0.10.1",
-    "@tanstack/vue-query": "^5.69.0",
-    "@vuepic/vue-datepicker": "11.0.1",
     "@vueuse/core": "13.0.0",
     "@vueuse/nuxt": "13.0.0",
-    "dayjs": "1.11.13",
-    "dayjs-nuxt": "2.1.11",
-    "nuxt": "3.16.1",
-    "pinia": "3.0.1",
+    "nuxt": "4.1.2",
     "vue": "3.5.21"
   },
   "devDependencies": {
     "@nuxt/ui": "3.2.0",
-    "@sentry/vue": "9.5.0",
-    "@types/dom-to-image": "^2.6.7",
     "@types/node": "^22.13.14",
-    "pinia-plugin-persistedstate": "4.2.0",
     "sass-embedded": "1.79.4",
     "typescript": "5.7.3",
     "vue-tsc": "^2.2.2"

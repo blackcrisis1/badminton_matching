@@ -34,74 +34,18 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    "dayjs-nuxt",
     "@nuxt/ui",
     "@nuxt/fonts",
     "@vueuse/nuxt",
-    "@pinia/nuxt",
-    "pinia-plugin-persistedstate/nuxt",
-    "@nuxtjs/i18n",
     "@nuxtjs/color-mode",
   ],
 
-  i18n: {
-    defaultLocale: "th",
-    locales: [
-      { code: "en", name: "English", file: "en.json" },
-      { code: "th", name: "Thailand", file: "th.json" },
-    ],
-  },
   css: ["@/assets/css/main.css"],
 
   colorMode: {
     classSuffix: "",
     preference: "system",
     fallback: "dark",
-  },
-
-  build: {
-    transpile: ["vue-datepicker"],
-  },
-
-  piniaPluginPersistedstate: {
-    storage: "localStorage",
-  },
-
-  dayjs: {
-    locales: ["th", "en"],
-    plugins: [
-      "timezone",
-      "buddhistEra",
-      "isBetween",
-      "customParseFormat",
-      "isSameOrAfter",
-      "isSameOrBefore",
-      "weekOfYear",
-      "isoWeek",
-      "advancedFormat",
-    ],
-    defaultLocale: [
-      "th",
-      {
-        weekStart: 1,
-        relativeTime: {
-          future: "อีก%s",
-          past: "%sที่ผ่านมา",
-          s: "ไม่กี่วินาที",
-          m: "ไม่กี่นาที",
-          mm: "%d นาที",
-          h: "หนึ่งชั่วโมง",
-          hh: "%d ชั่วโมง",
-          d: "ไม่กี่วัน",
-          dd: "%d วัน",
-          M: "หนึ่งเดือน",
-          MM: "%d เดือน",
-          y: "หนึ่งปี",
-          yy: "%d ปี",
-        },
-      },
-    ],
-    defaultTimezone: "Asia/Bangkok",
   },
 
   ui: {
