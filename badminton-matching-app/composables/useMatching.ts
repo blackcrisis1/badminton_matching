@@ -1,5 +1,3 @@
-import { ref, reactive } from 'vue'
-
 interface MatchHistory {
   [key: string]: { [opponent: string]: number }
 }
